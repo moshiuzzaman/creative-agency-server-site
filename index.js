@@ -72,6 +72,14 @@ client.connect(err => {
           servicesCollection.find()
           .toArray((err, result)=>res.send(result))
       })
+      app.delete('/serviceDelete/:id',(req, res) => {
+        const id=req.params.id
+        console.log(id);
+        servicesCollection.deleteOne({_id:ObjectId(id)})
+        .then(result => res.send(result.deletedCount>0))
+  
+    })
+  
       app.get('/reviews',(req,res)=>{
           reviewCollection.find()
           .toArray((err, result)=>res.send(result))
